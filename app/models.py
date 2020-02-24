@@ -12,7 +12,8 @@ class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(64), index=True)
     answer = db.Column(db.String(64))
-    user_answer = db.Column(db.Enum(AnswerChoices), default=AnswerChoices.a, nullable=False)
+    # user_answer = db.Column(db.Enum(AnswerChoices), default=AnswerChoices.a, nullable=False)
+    user_answer = db.Column(db.String(64), default="I do not know.")
 
     def __repr__(self):
         return '<User {}>'.format(self.question)

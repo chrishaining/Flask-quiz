@@ -29,9 +29,28 @@ def update_topic(topic_id):
     return redirect('/')
 
 
+@app.route('/quiz')
+def show_quiz():
+    quiz = Topic.query.all()
+    score=0
+    for topic in quiz:
+        if topic.answer == topic.user_answer:
+            score +=1
+    return render_template('quiz.html', quiz=quiz, score=score)
+
+# answer a question. 
+@app.route('/quiz/<int:topic_id>/answer', methods=['POST'])
+def answer_question(topic_id):
+    new_user_answer = request.form.get("new_user_answer")
+    topic_id = request.form.get("topic_id")
+    topic = Topic.query.filter_by(id=topic_id).first()
+    topic.user_answer = new_user_answer
+    db.session.commit()
+    return redirect('/quiz')
+
 # create random quizzes. It might help to have a TopicsBank class (i.e. all the questions) that has a random_quiz method. It would mean I could do less work in the routes. However, I'm not sure about the implications so I will stick with creating random quizzes through the routes. This method calculates the score (it might be better to put the score somewhere else).
 @app.route('/random_quiz')
-def show_quiz():
+def show_random_quiz():
     multis = MultipleChoiceTopic.query.all()
     length = int(len(multis)/2)
     quiz = random.sample(multis, length)
@@ -89,7 +108,7 @@ def submit_answer(multiple_choice_topic_id):
 
 # answer a multiple_choice_topic. 
 @app.route('/random_quiz/<int:multiple_choice_topic_id>/answer', methods=['POST'])
-def answer_question(multiple_choice_topic_id):
+def answer_multi_choice_question(multiple_choice_topic_id):
     new_user_answer = request.form.get("new_user_answer")
     multiple_choice_topic_id = request.form.get("multiple_choice_topic_id")
     multiple_choice_topic = MultipleChoiceTopic.query.filter_by(id=multiple_choice_topic_id).first()
