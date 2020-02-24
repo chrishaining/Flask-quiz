@@ -10,10 +10,12 @@
                 <th>ID</th>
                 <th>Question</th>
                 <th>Answer</th>
+                <th>Non modal answer</th>
+
             </thead>
             <tbody>
 
-                {% for topic in topics%}
+                {% for topic in topics %}
                 <tr>
                     <td>{{topic.id}}</td>
                     <td> {{topic.question}}</td>
@@ -38,6 +40,16 @@
                             </div>
                         </div>
                     </td>
+                    <td>{{topic.answer}}</td>
+
+                    <td>
+                        <form method="POST" action="/{{topic.id}}/update">
+                            <input type="hidden" value="{{topic.id}}" name="topic_id">
+                            <input type="text" value="{{topic.answer}}" name="newanswer">
+                            <button type="submit" value="Update">Update the answer</button>
+                        </form>
+                    </td>
+
                 </tr>
                 {% endfor %}
             </tbody>
@@ -56,5 +68,6 @@
             <button type="submit" class="save btn btn-default" value="Add Topic">Add Topic</button>
         </form>
     </div>
+
 </div>
 {% endblock %}

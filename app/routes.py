@@ -1,7 +1,8 @@
 from app import app, db
-from app.models import Topic
+from app.models import Topic, MultipleChoiceTopic
 from flask import render_template, redirect, request
 import random
+from sqlalchemy import update
 
 @app.route('/')
 def index():
@@ -17,43 +18,64 @@ def create_topic():
     db.session.commit()
     return redirect('/')
 
-# an attempt to create a filter method
-# @app.route('/')
-# def search_results(search):
-#     results = []
-#     search_string = search.data['search']
-#     if search_string:
-#         if search.data['select'] == 'answer':
-#             qry = db_session.query(Topic).filter(
-#                     Topic.answer.contains(search_string))
-#             results = [item[0] for item in qry.all()]
-#         elif search.data['select'] == 'question':
-#             qry = db_session.query(Topic).filter(
-#                 Topic.question.contains(search_string))
-#             results = qry.all()
-#         else:
-#             qry = db_session.query(Topic)
-#             results = qry.all()
-#     else:
-#         qry = db_session.query(Topic)
-#         results = qry.all()
-#     if not results:
-#         print('No results found!')
-#         return redirect('/')
-#     else:
-#         # display results
-#         table = Results(results)
-#         table.border = True
-#         return render_template('index.html', table=table)
+# update a topic. This works. The next step is to link it to the id. 
+@app.route('/<int:topic_id>/update', methods=['POST'])
+def update_topic(topic_id):
+    newanswer = request.form.get("newanswer")
+    topic_id = request.form.get("topic_id")
+    topic = Topic.query.filter_by(id=topic_id).first()
+    topic.answer = newanswer
+    db.session.commit()
+    return redirect('/')
 
 
-# @app.route('/random_quiz')
-# def random_quiz_home():
-#     topics = Topic.query.all()
-#     return render_template('random_quiz.html', title='Random Quiz', topics=topics)
+  
 
+# create random quizzes. It might help to have a TopicsBank class (i.e. all the questions) that has a random_quiz method. It would mean I could do less work in the routes. However, I'm not sure about the implications so I will stick with creating random quizzes through the routes.
 @app.route('/random_quiz')
-def create_quiz():
-    topics = Topic.query.all()
-    quiz = random.sample(topics, k=4)
-    return render_template('random_quiz.html', quiz=quiz, topics=topics)
+def show_quiz():
+    multis = MultipleChoiceTopic.query.all()
+    length = int(len(multis)/2)
+    quiz = random.sample(multis, length)
+    return render_template('random_quiz.html', quiz=quiz, multis=multis)
+
+@app.route('/random_quiz', methods=['POST'])
+def create_multi_choice_topic():
+    question = request.form['question']
+    option_a = request.form['option_a']
+    option_b = request.form['option_b']
+    option_c = request.form['option_c']
+    answer = request.form['answer']
+    newMultiChoiceTopic = MultipleChoiceTopic(question=question, option_a=option_a, option_b=option_b, option_c=option_c, answer=answer)
+    db.session.add(newMultiChoiceTopic)
+    db.session.commit()
+    return redirect('/random_quiz')
+
+
+# @app.route('/random_quiz/<int:multiple_choice_topic_id>', methods=['GET', 'POST'])
+# def submit_answer(multiple_choice_topic_id):
+#     multiple_choice_topic = MultipleChoiceTopic.query.get(multiple_choice_topic_id)
+#     user_answer = request.form['user_answer']
+#     # multiple_choice_topic.user_answer = request.form['user_answer']
+#     db.execute("INSERT INTO multiple_choice_topic.user_answer VALUES (?)", [user_answer])
+#     db.session.commit()
+#     return redirect('/random_quiz')
+
+  
+# @app.route('/random_quiz/<int:multiple_choice_topic_id>', methods=['GET', 'POST'])
+# def submit_answer(multiple_choice_topic_id):
+    # chosen_multiple_choice_topic = MultipleChoiceTopic.query.get(multiple_choice_topic_id)
+    # bob = request.form['user_answer']
+    # multiple_choice_topic.user_answer = request.form['user_answer']
+    # db.execute("INSERT INTO multiple_choice_topic.user_answer VALUES (?)", [user_answer])
+
+    # MultipleChoiceTopic.update().where(MultipleChoiceTopic.c.id==multiple_choice_topic_id).values(user_answer=bob)
+    # db.session.commit()
+    # return redirect('/random_quiz')
+
+@app.route('/random_quiz/<int:multiple_choice_topic_id>', methods=['GET', 'POST'])
+def submit_answer(multiple_choice_topic_id):
+    multiple_choice_topic = MultipleChoiceTopic.query.get(multiple_choice_topic_id)
+    multiple_choice_topic.user_answer = request.form['user_answer']
+    db.session.commit()
+    return redirect('/random_quiz')

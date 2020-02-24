@@ -3,33 +3,35 @@
     <div class="row">
         <h1>Hi!</h1>
         <p>On this page you can generate a random quiz:</p>
+        <p>{{multis}}</p>
     </div>
     <div class="row">
         <table class="table table-striped">
             <thead>
                 <th>ID</th>
                 <th>Question</th>
+                <th>Options</th>
                 <th>Answer</th>
             </thead>
             <tbody>
 
-                {% for topic in quiz %}
+                {% for multiple_choice_topic in quiz %}
                 <tr>
-                    <td>{{topic.id}}</td>
-                    <td> {{topic.question}}</td>
+                    <td>{{multiple_choice_topic.id}}</td>
+                    <td> {{multiple_choice_topic.question}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ topic.id }}">View Answer
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ multiple_choice_topic.id }}">View Answer
                         </button>
-                        <div class="modal fade" id="myModal{{ topic.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="myModal{{ multiple_choice_topic.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="myModalLabel">
-                                            Question: {{topic.question}}
+                                            Question: {{multiple_choice_topic.question}}
                                         </h5>
                                     </div>
                                     <div class="modal-body">
-                                        Answer: {{topic.answer}}
+                                        Answer: {{multiple_choice_topic.answer}}
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -38,6 +40,30 @@
                             </div>
                         </div>
                     </td>
+                    <!-- <td>
+                        <form action="/random_quiz/{{multiple_choice_topic.id}}" method="POST">
+                            <input type="radio" name="option_a" value="{{multiple_choice_topic.option_a}}">
+                            <label for="option_a">A: {{multiple_choice_topic.option_a}}</label><br>
+                            <input type="radio" name="option_b" value="{{ multiple_choice_topic.option_b }}">
+                            <label for="option_b">B: {{multiple_choice_topic.option_b}}</label><br>
+                            <input type="radio" name="option_c" value="{{ multiple_choice_topic.option_c }}">
+                            <label for="option_c">C: {{multiple_choice_topic.option_c}}</label><br>
+                            <input type="radio" name="option_d" value="{{ multiple_choice_topic.option_d }}">
+                            <label for="option_d">D: {{multiple_choice_topic.option_d}}</label>
+                            <button type="submit">Submit</button>
+
+                        </form>
+                    </td> -->
+
+                    <td>
+                        <form>
+                            <label for="user_answer">Your answer:</label><br>
+                            <input type="text" id="user_answer" name="user_answer">
+                            <button type="submit" value="user_answer">Submit Answer</button>
+                        </form>
+                    </td>
+
+                    <td>{{multiple_choice_topic.user_answer}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -45,6 +71,29 @@
 
     </div>
 
+
+    <div class="row">
+        <h2>Add a new multiple choice topic</h2>
+        <form action="/random_quiz" method="POST">
+            <label for="question">Question</label>
+            <input type="text" name="question" id="question" required />
+
+            <label for="option_a">A</label>
+            <input type="text" name="option_a" id="option_a" required />
+
+            <label for="option_b">B</label>
+            <input type="text" name="option_b" id="option_b" required />
+
+            <label for="option_c">C</label>
+            <input type="text" name="option_c" id="option_c" required />
+
+            <label for="answer">Answer</label>
+            <input type="text" name="answer" id="answer" required />
+
+            <button type="submit" class="save btn btn-default" value="Add Topic">Add Topic</button>
+        </form>
+    </div>
+</div>
 
 </div>
 {% endblock %}
