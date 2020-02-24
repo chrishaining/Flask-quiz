@@ -18,7 +18,7 @@ def create_topic():
     db.session.commit()
     return redirect('/')
 
-# update a topic. This works. The next step is to link it to the id. 
+# update a topic. This works. 
 @app.route('/<int:topic_id>/update', methods=['POST'])
 def update_topic(topic_id):
     newanswer = request.form.get("newanswer")
@@ -29,15 +29,22 @@ def update_topic(topic_id):
     return redirect('/')
 
 
-  
-
-# create random quizzes. It might help to have a TopicsBank class (i.e. all the questions) that has a random_quiz method. It would mean I could do less work in the routes. However, I'm not sure about the implications so I will stick with creating random quizzes through the routes.
+# create random quizzes. It might help to have a TopicsBank class (i.e. all the questions) that has a random_quiz method. It would mean I could do less work in the routes. However, I'm not sure about the implications so I will stick with creating random quizzes through the routes. This method calculates the score (it might be better to put the score somewhere else).
 @app.route('/random_quiz')
 def show_quiz():
     multis = MultipleChoiceTopic.query.all()
     length = int(len(multis)/2)
     quiz = random.sample(multis, length)
-    return render_template('random_quiz.html', quiz=quiz, multis=multis)
+    score=0
+    for topic in quiz:
+        if topic.outcome == True:
+            score +=1
+    return render_template('random_quiz.html', quiz=quiz, multis=multis, score=score)
+
+# @app.route('/random_quiz')
+# def score():
+#     score = 0
+#     return render_template('random_quiz.html', score=score)
 
 @app.route('/random_quiz', methods=['POST'])
 def create_multi_choice_topic():
@@ -77,5 +84,15 @@ def create_multi_choice_topic():
 def submit_answer(multiple_choice_topic_id):
     multiple_choice_topic = MultipleChoiceTopic.query.get(multiple_choice_topic_id)
     multiple_choice_topic.user_answer = request.form['user_answer']
+    db.session.commit()
+    return redirect('/random_quiz')
+
+# answer a multiple_choice_topic. 
+@app.route('/random_quiz/<int:multiple_choice_topic_id>/answer', methods=['POST'])
+def answer_question(multiple_choice_topic_id):
+    new_user_answer = request.form.get("new_user_answer")
+    multiple_choice_topic_id = request.form.get("multiple_choice_topic_id")
+    multiple_choice_topic = MultipleChoiceTopic.query.filter_by(id=multiple_choice_topic_id).first()
+    multiple_choice_topic.answer = new_user_answer
     db.session.commit()
     return redirect('/random_quiz')

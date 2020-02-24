@@ -56,10 +56,10 @@
                     </td> -->
 
                     <td>
-                        <form>
-                            <label for="user_answer">Your answer:</label><br>
-                            <input type="text" id="user_answer" name="user_answer">
-                            <button type="submit" value="user_answer">Submit Answer</button>
+                        <form method="POST" action="/random_quiz/{{multiple_choice_topic.id}}/answer">
+                            <input type="hidden" value="{{multiple_choice_topic.id}}" name="multiple_choice_topic_id">
+                            <input type="text" value="{{multiple_choice_topic.user_answer}}" name="new_user_answer">
+                            <button type="submit" value="Answer">Give your answer</button>
                         </form>
                     </td>
 
@@ -69,6 +69,10 @@
             </tbody>
         </table>
 
+    </div>
+
+    <div class="row">
+        <h1>Your score: {{score}}</h1>
     </div>
 
 

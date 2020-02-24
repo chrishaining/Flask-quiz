@@ -34,6 +34,14 @@
                                         Answer: {{topic.answer}}
                                     </div>
                                     <div class="modal-footer">
+
+                                        <form method="POST" action="/{{topic.id}}/update">
+                                            <input type="hidden" value="{{topic.id}}" name="topic_id">
+                                            <input type="text" value="{{topic.answer}}" name="newanswer">
+                                            <button type="submit" value="Update">Update the answer</button>
+                                        </form>
+
+
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
