@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <h1>Hi!</h1>
+    </div>
+    <div class="row">
+        <p>Welcome to this app. Here are the topics:</p>
+        <table class="table table-striped">
+            <thead>
+                <th>ID</th>
+                <th>Question</th>
+                <th>Answer</th>
+            </thead>
+            <tbody>
+
+                {% for topic in topics%}
+                <tr>
+                    <td>{{topic.id}}</td>
+                    <td> {{topic.question}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ topic.id }}">View Answer
+                        </button>
+                        <div class="modal fade" id="myModal{{ topic.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="myModalLabel">
+                                            Question: {{topic.question}}
+                                        </h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        Answer: {{topic.answer}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <div class="row">
+        <h2>Add a new topic</h2>
+        <form action="/" method="POST">
+            <label for="question">Question</label>
+            <input type="text" name="question" id="question" required />
+            <label for="answer">Answer</label>
+            <input type="text" name="answer" id="answer" required />
+            <button type="submit" class="save btn btn-default" value="Add Topic">Add Topic</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

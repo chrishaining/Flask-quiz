@@ -1,0 +1,35 @@
+/* navbar */
+
+nav {
+    background-color: #080F5B;
+}
+
+nav a {
+    color: white
+}
+
+nav a:hover {
+    color: gold;
+    text-decoration: none;
+}
+
+.navbar-toggler-icon {
+    color: white;
+    padding-left: 20px;
+    font-size: 200%
+}
+
+.navbar-brand {
+    color: white
+}
+
+.navbar-nav {
+    list-style-type: none;
+}
+
+
+/* rows */
+
+.row {
+    padding: 20px;
+}
