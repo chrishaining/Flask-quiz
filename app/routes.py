@@ -34,9 +34,11 @@ def show_quiz():
     quiz = Topic.query.all()
     score=0
     for topic in quiz:
-        if topic.answer == topic.user_answer:
+        topic.check_answer()
+        # if topic.answer == topic.user_answer:
+        if topic.points == 1:
             score +=1
-            topic.points = 1
+            # topic.points = 1
     return render_template('quiz.html', quiz=quiz, score=score)
 
 # answer a question. 

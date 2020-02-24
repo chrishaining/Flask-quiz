@@ -19,6 +19,13 @@ class Topic(db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.question)
 
+    def check_answer(self):
+        if self.user_answer == self.answer:
+            self.points = 1
+        else:
+            self.points = 0
+        return self.points
+
 class MultipleChoiceTopic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(64), index=True)
