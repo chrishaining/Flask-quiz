@@ -1,17 +1,18 @@
 {% extends "base.html" %} {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <h1>Hi!</h1>
-        <p>On this page you can generate a random quiz:</p>
-        <p>{{multis}}</p>
+        <h1>Hi! On this page you can generate a random quiz:</h1>
     </div>
+
     <div class="row">
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
             <thead>
                 <th>ID</th>
                 <th>Question</th>
-                <th>Options</th>
-                <th>Answer</th>
+                <th>View answer</th>
+                <th>Give Answer</th>
+                <!-- <th></th> -->
+
             </thead>
             <tbody>
 
@@ -59,11 +60,11 @@
                         <form method="POST" action="/random_quiz/{{multiple_choice_topic.id}}/answer">
                             <input type="hidden" value="{{multiple_choice_topic.id}}" name="multiple_choice_topic_id">
                             <input type="text" value="{{multiple_choice_topic.user_answer}}" name="new_user_answer">
-                            <button type="submit" value="Answer">Give your answer</button>
+                            <button type="submit" class="btn btn-primary" value="Answer">Give your answer</button>
                         </form>
                     </td>
 
-                    <td>{{multiple_choice_topic.user_answer}}</td>
+                    <!-- <td>{{multiple_choice_topic.user_answer}}</td> -->
                 </tr>
                 {% endfor %}
             </tbody>
@@ -94,7 +95,7 @@
             <label for="answer">Answer</label>
             <input type="text" name="answer" id="answer" required />
 
-            <button type="submit" class="save btn btn-default" value="Add Topic">Add Topic</button>
+            <button type="submit" class="btn btn-primary" value="Add Topic">Add Topic</button>
         </form>
     </div>
 </div>

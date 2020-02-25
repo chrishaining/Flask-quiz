@@ -5,18 +5,73 @@
         <p>This is the quiz:</p>
     </div>
     <div class="row">
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
             <thead>
                 <th>ID</th>
                 <th>Question</th>
-                <th>Answer</th>
+                <th>Your current answer</th>
+                <th>Status</th>
+                <th>Update Answer</th>
+                <th>View Answer</th>
+
+
+
+
             </thead>
             <tbody>
 
                 {% for topic in quiz %}
                 <tr>
                     <td>{{topic.id}}</td>
+
                     <td> {{topic.question}}</td>
+
+                    <td>Your answer: {{topic.user_answer}}</td>
+
+                    <td>
+                        {% if topic.user_answer == topic.answer %}
+                        <p>
+                            <i class="fas fa-check"></i></p>{% else %}
+                        <i class="fas fa-poo"></i></p>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myUpdateModal{{ topic.id }}">Update your Answer
+                                </button>
+                        <div class="modal fade" id="myUpdateModal{{ topic.id }}" tabindex="-1" role="dialog" aria-labelledby="myUpdateModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="myUpdateModalLabel">
+                                            Your current answer
+                                        </h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{topic.user_answer}}
+                                    </div>
+                                    <div class="modal-footer">
+
+                                        <form method="POST" action="/quiz/{{topic.id}}/answer">
+                                            <input type="hidden" value="{{topic.id}}" name="topic_id">
+                                            <input type="text" value="{{topic.user_answer}}" name="new_user_answer">
+                                            <button type="submit" class="btn btn-primary" value="Answer">Update your answer</button>
+                                        </form>
+                                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--  -->
+                        <!-- <form method="POST" action="/quiz/{{topic.id}}/answer">
+                            <input type="hidden" value="{{topic.id}}" name="topic_id">
+                            <input type="text" value="{{topic.user_answer}}" name="new_user_answer">
+                            <button type="submit" class="btn btn-primary" value="Answer">Update your answer</button>
+                        </form> -->
+                    </td>
+
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ topic.id }}">View Answer
                         </button>
@@ -38,15 +93,7 @@
                             </div>
                         </div>
                     </td>
-                    <td>
-                        <form method="POST" action="/quiz/{{topic.id}}/answer">
-                            <input type="hidden" value="{{topic.id}}" name="topic_id">
-                            <input type="text" value="{{topic.user_answer}}" name="new_user_answer">
-                            <button type="submit" value="Answer">Give your answer</button>
-                        </form>
-                    </td>
-                    <td>Real answer: {{topic.answer}}</td>
-                    <td>Your answer: {{topic.user_answer}}</td>
+
                 </tr>
                 {% endfor %}
             </tbody>

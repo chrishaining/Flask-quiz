@@ -39,6 +39,7 @@ def show_quiz():
         # if topic.points == 1:
             score +=1
             # topic.points = 1
+    
     return render_template('quiz.html', quiz=quiz, score=score)
 
 # answer a question. 
