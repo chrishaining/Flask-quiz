@@ -34,9 +34,9 @@ def show_quiz():
     quiz = Topic.query.all()
     score=0
     for topic in quiz:
-        topic.check_answer()
-        # if topic.answer == topic.user_answer:
-        if topic.points == 1:
+        # topic.check_answer()
+        if topic.answer == topic.user_answer:
+        # if topic.points == 1:
             score +=1
             # topic.points = 1
     return render_template('quiz.html', quiz=quiz, score=score)
@@ -118,3 +118,10 @@ def answer_multi_choice_question(multiple_choice_topic_id):
     multiple_choice_topic.answer = new_user_answer
     db.session.commit()
     return redirect('/random_quiz')
+
+# flipcard fun
+@app.route('/flipper')
+def flipper():
+    topics = Topic.query.all()
+    card = random.choice(topics)
+    return render_template('flipcard.html', title='Flipper', topics=topics, card=card)

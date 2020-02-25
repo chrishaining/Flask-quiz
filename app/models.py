@@ -14,17 +14,17 @@ class Topic(db.Model):
     answer = db.Column(db.String(64))
     # user_answer = db.Column(db.Enum(AnswerChoices), default=AnswerChoices.a, nullable=False)
     user_answer = db.Column(db.String(64), default="I do not know.")
-    points = db.Column(db.Integer, default=0)
+    # points = db.Column(db.Integer, default=0)
 
     def __repr__(self):
         return '<User {}>'.format(self.question)
 
-    def check_answer(self):
-        if self.user_answer == self.answer:
-            self.points = 1
-        else:
-            self.points = 0
-        return self.points
+    # def check_answer(self):
+    #     if self.user_answer == self.answer:
+    #         self.points = 1
+    #     else:
+    #         self.points = 0
+    #     return self.points
 
 class MultipleChoiceTopic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
