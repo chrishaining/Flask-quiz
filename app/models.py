@@ -14,10 +14,11 @@ class Topic(db.Model):
     answer = db.Column(db.String(64))
     # user_answer = db.Column(db.Enum(AnswerChoices), default=AnswerChoices.a, nullable=False)
     user_answer = db.Column(db.String(64), default="I do not know.")
+
     # points = db.Column(db.Integer, default=0)
 
     def __repr__(self):
-        return '<User {}>'.format(self.question)
+        return '<Topic {}>'.format(self.question)
 
     # def check_answer(self):
     #     if self.user_answer == self.answer:
@@ -42,7 +43,7 @@ class MultipleChoiceTopic(db.Model):
     user_answer = db.Column(db.String(64), default=option_d, nullable=True)
 
     def __repr__(self):
-        return '<User {}>'.format(self.question)
+        return '<MultipleChoiceTopic {}>'.format(self.question)
 
     def check_answer(self):
         if self.user_answer == self.answer:
@@ -50,3 +51,19 @@ class MultipleChoiceTopic(db.Model):
         else:
             self.outcome = False
         return self.outcome
+
+# class Quiz(db.Model):
+    # id = db.Column(db.Integer, primary_key=True)
+    # topics = db.relationship('Topic', backref='quiz', lazy='dynamic')
+    # topics = []
+
+    # def __repr__(self):
+    #     return '<Quiz {}>'.format(self.id)
+    
+    # def add_topic(self, topic):
+    #     self.topics.append(topic)
+    #     return self.topics
+
+    # def show_questions(self):
+    #     for topic in self.topics:
+    #         return 'Question {}'.format(topic)
