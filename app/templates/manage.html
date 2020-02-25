@@ -39,7 +39,6 @@
                                             question</button>
                                         </form>
 
-
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -81,12 +80,14 @@
     </div>
 
     <div class="row">
-        <h2>Add a new topic</h2><br>
+        <h2>Add a new topic</h2>
+        <br>
+
         <form action="/manage" method="POST">
             <label for="question">Question</label>
             <input type="text" name="question" id="question" required />
             <label for="answer">Answer</label>
-            <input type="text" name="answer" id="answer" required />
+            <input type="text" name="answer" id="answer" required /><br>
             <button type="submit" class="btn btn-primary" value="Add Topic">Add Topic</button>
         </form>
     </div>

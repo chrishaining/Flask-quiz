@@ -134,3 +134,8 @@ def flipper():
     topics = Topic.query.all()
     card = random.choice(topics)
     return render_template('home.html', title='Home', topics=topics, card=card)
+
+@app.route('/quiz_creator')
+def quiz_creator():
+    topics = Topic.query.all()
+    return render_template('quiz_creator.html', title='Quiz Creator', topics=topics)
