@@ -48,7 +48,7 @@ def show_quiz():
             score +=1
             # topic.points = 1
     
-    return render_template('quiz.html', quiz=quiz, score=score)
+    return render_template('quiz.html', title='Quiz', quiz=quiz, score=score)
 
 # answer a question. 
 @app.route('/quiz/<int:topic_id>/answer', methods=['POST'])
@@ -133,4 +133,4 @@ def answer_question(topic_id):
 def flipper():
     topics = Topic.query.all()
     card = random.choice(topics)
-    return render_template('home.html', title='Flipper', topics=topics, card=card)
+    return render_template('home.html', title='Home', topics=topics, card=card)

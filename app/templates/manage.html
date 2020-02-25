@@ -1,10 +1,9 @@
 {% extends "base.html" %} {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <h1>Hi!</h1>
+        <h1>Use this page to add and edit questions.</h1>
     </div>
     <div class="row">
-        <p>Welcome to this app. Here are the topics:</p>
         <table class="table table-striped table-bordered">
             <thead>
                 <th>ID</th>
@@ -18,10 +17,10 @@
                 {% for topic in topics %}
                 <tr>
                     <td>{{topic.id}}</td>
-                    <td> {{topic.question}}
+                    <td> {{topic.question}}<br>
 
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myQuestionModal{{ topic.id }}">Update the question
-                                </button>
+                        </button>
                         <div class="modal fade" id="myQuestionModal{{ topic.id }}" tabindex="-1" role="dialog" aria-labelledby="myQuestionModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -31,14 +30,13 @@
                                         </h5>
                                     </div>
                                     <div class="modal-body">
-                                        {{topic.question}}
-                                    </div>
-                                    <div class="modal-footer">
-
                                         <form method="POST" action="/manage/{{topic.id}}/update_question">
                                             <input type="hidden" value="{{topic.id}}" name="topic_id">
-                                            <input type="text" value="{{topic.question}}" name="newquestion">
-                                            <button type="submit" class="btn btn-primary" value="Update">Update the question</button>
+                                            <input type="text" value="{{topic.question}}" name="newquestion" size="55">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" value="Update">Update the
+                                            question</button>
                                         </form>
 
 
@@ -47,10 +45,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
                     </td>
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ topic.id }}">View Answer
@@ -64,14 +58,13 @@
                                         </h5>
                                     </div>
                                     <div class="modal-body">
-                                        Answer: {{topic.answer}}
-                                    </div>
-                                    <div class="modal-footer">
-
                                         <form method="POST" action="/manage/{{topic.id}}/update_answer">
                                             <input type="hidden" value="{{topic.id}}" name="topic_id">
-                                            <input type="text" value="{{topic.answer}}" name="newanswer">
-                                            <button type="submit" class="btn btn-primary" value="Update">Update the answer</button>
+                                            <input type="text" value="{{topic.answer}}" name="newanswer" size="55">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" value="Update">Update the
+                                            answer</button>
                                         </form>
 
 
@@ -81,25 +74,14 @@
                             </div>
                         </div>
                     </td>
-
-                    <!-- <td>
-                        <form method="POST" action="/manage/{{topic.id}}/update">
-                            <input type="hidden" value="{{topic.id}}" name="topic_id">
-                            <input type="text" value="{{topic.answer}}" name="newanswer">
-                            <button type="submit" class="btn btn-primary" value="Update">Update the answer</button>
-                        </form>
-                    </td> -->
-
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-
     </div>
 
-
     <div class="row">
-        <h2>Add a new topic</h2>
+        <h2>Add a new topic</h2><br>
         <form action="/manage" method="POST">
             <label for="question">Question</label>
             <input type="text" name="question" id="question" required />
