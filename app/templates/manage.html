@@ -10,7 +10,7 @@
                 <th>ID</th>
                 <th>Question</th>
                 <th>Answer</th>
-                <th>Update</th>
+                <!-- <th>Update</th> -->
 
             </thead>
             <tbody>
@@ -18,7 +18,40 @@
                 {% for topic in topics %}
                 <tr>
                     <td>{{topic.id}}</td>
-                    <td> {{topic.question}}</td>
+                    <td> {{topic.question}}
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myQuestionModal{{ topic.id }}">Update the question
+                                </button>
+                        <div class="modal fade" id="myQuestionModal{{ topic.id }}" tabindex="-1" role="dialog" aria-labelledby="myQuestionModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="myQuestionModalLabel">
+                                            Current question:
+                                        </h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{topic.question}}
+                                    </div>
+                                    <div class="modal-footer">
+
+                                        <form method="POST" action="/manage/{{topic.id}}/update_question">
+                                            <input type="hidden" value="{{topic.id}}" name="topic_id">
+                                            <input type="text" value="{{topic.question}}" name="newquestion">
+                                            <button type="submit" class="btn btn-primary" value="Update">Update the question</button>
+                                        </form>
+
+
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </td>
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ topic.id }}">View Answer
                         </button>
@@ -35,10 +68,10 @@
                                     </div>
                                     <div class="modal-footer">
 
-                                        <form method="POST" action="/{{topic.id}}/update">
+                                        <form method="POST" action="/manage/{{topic.id}}/update_answer">
                                             <input type="hidden" value="{{topic.id}}" name="topic_id">
                                             <input type="text" value="{{topic.answer}}" name="newanswer">
-                                            <button type="submit" value="Update">Update the answer</button>
+                                            <button type="submit" class="btn btn-primary" value="Update">Update the answer</button>
                                         </form>
 
 
@@ -48,15 +81,14 @@
                             </div>
                         </div>
                     </td>
-                    <!-- <td>{{topic.answer}}</td> -->
 
-                    <td>
-                        <form method="POST" action="/{{topic.id}}/update">
+                    <!-- <td>
+                        <form method="POST" action="/manage/{{topic.id}}/update">
                             <input type="hidden" value="{{topic.id}}" name="topic_id">
                             <input type="text" value="{{topic.answer}}" name="newanswer">
                             <button type="submit" class="btn btn-primary" value="Update">Update the answer</button>
                         </form>
-                    </td>
+                    </td> -->
 
                 </tr>
                 {% endfor %}
@@ -68,7 +100,7 @@
 
     <div class="row">
         <h2>Add a new topic</h2>
-        <form action="/" method="POST">
+        <form action="/manage" method="POST">
             <label for="question">Question</label>
             <input type="text" name="question" id="question" required />
             <label for="answer">Answer</label>
