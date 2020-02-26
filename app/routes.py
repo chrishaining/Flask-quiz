@@ -138,14 +138,13 @@ def flipper():
 @app.route('/quiz_creator')
 def quiz_creator():
     topics = Topic.query.all()
-    quizzes = 
     # for quiz in quizzes:
     #     questions.append(quiz.topics)
     # questions = []
     # for quiz in quizzes:
     #     qs = quiz.show_questions()
     #     questions.append(qs)
-    return render_template('quiz_creator.html', title='Quiz Creator', quizzes=quizzes)
+    return render_template('quiz_creator.html', title='Quiz Creator')
 
 # @app.route('/quiz_creator', methods=['POST'])
 # def create_quiz():
@@ -159,14 +158,14 @@ def quiz_creator():
 #     db.session.commit()
 #     return redirect('/quiz_creator')
 
-@app.route('/quiz_creator', methods=['POST'])
-def create_quiz():
-    topics = Topic.query.all()
-    quiz = Quiz()
-    selected_topics = random.sample(topics, 2)
-    for topic in selected_topics:
-        # quiz.add_topic(topic)
-        quiz.topics.append(topic)
-    db.session.add(quiz)
-    db.session.commit()
-    return redirect('/quiz_creator')
+# @app.route('/quiz_creator', methods=['POST'])
+# def create_quiz():
+#     topics = Topic.query.all()
+#     quiz = Quiz()
+#     selected_topics = random.sample(topics, 2)
+#     for topic in selected_topics:
+#         # quiz.add_topic(topic)
+#         quiz.topics.append(topic)
+#     db.session.add(quiz)
+#     db.session.commit()
+#     return redirect('/quiz_creator')

@@ -8,15 +8,11 @@
 
     <div class="row">
         <ul>
-            {% for quiz in quizzes %}
-            <li>{{quiz}}: {{quiz.topics}}</li>
+            {% for topic in quiz %}
+            <li>{{topic.question}}: {{topic.answer}}</li>
             {% endfor %}
         </ul>
     </div>
-
-    <!-- <div class="row">
-        <h2>{{questions}}</h2>
-    </div> -->
 
     <div class="row">
         <h2>Create a quiz</h2>
