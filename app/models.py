@@ -14,6 +14,8 @@ class Topic(db.Model):
     answer = db.Column(db.String(64))
     # user_answer = db.Column(db.Enum(AnswerChoices), default=AnswerChoices.a, nullable=False)
     user_answer = db.Column(db.String(64), default="I do not know.")
+    # links = db.relationship('Link', backref='topic', lazy='dynamic')
+
 
     # points = db.Column(db.Integer, default=0)
 
@@ -54,8 +56,7 @@ class MultipleChoiceTopic(db.Model):
 
 # class Quiz(db.Model):
     # id = db.Column(db.Integer, primary_key=True)
-    # topics = db.relationship('Topic', backref='quiz', lazy='dynamic')
-    # topics = []
+    # links = db.relationship('Link', backref='quiz', lazy='dynamic')
 
     # def __repr__(self):
     #     return '<Quiz {}>'.format(self.id)
@@ -67,3 +68,12 @@ class MultipleChoiceTopic(db.Model):
     # def show_questions(self):
     #     for topic in self.topics:
     #         return 'Question {}'.format(topic)
+
+    # create a Link class to connect Topic and Quiz. This means that a Topic will have to have a way to attach multiple quizzes, and a Quiz will have to have a way to attach multiple topics.
+    # class Link(db.Model):
+    # id = db.Column(db.Integer, primary_key=True)
+    # topic_id = db.Column(db.Integer, db.ForeignKey('topic.id'))
+    # quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'))
+
+
+
