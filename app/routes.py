@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import Topic, MultipleChoiceTopic, Quiz, Link
+from app.models import Topic, MultipleChoiceTopic 
 from flask import render_template, redirect, request
 import random
 from sqlalchemy import update
@@ -158,14 +158,14 @@ def quiz_creator():
 #     db.session.commit()
 #     return redirect('/quiz_creator')
 
-@app.route('/quiz_creator', methods=['POST'])
-def create_quiz():
-    topics = Topic.query.all()
-    quiz = Quiz()
-    selected_topics = random.sample(topics, 2)
-    for topic in selected_topics:
-        # quiz.add_topic(topic)
-        quiz.quiz_topics.append(topic)
-    db.session.add(quiz)
-    db.session.commit()
-    return redirect('/quiz_creator')
+# @app.route('/quiz_creator', methods=['POST'])
+# def create_quiz():
+#     topics = Topic.query.all()
+#     quiz = Quiz()
+#     selected_topics = random.sample(topics, 2)
+#     for topic in selected_topics:
+#         # quiz.add_topic(topic)
+#         quiz.quiz_topics.append(topic)
+#     db.session.add(quiz)
+#     db.session.commit()
+#     return redirect('/quiz_creator')
