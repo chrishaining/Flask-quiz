@@ -5,12 +5,12 @@
     </div>
 
     <div class="row">
-        {% for resource in resources %}
-        <h1>{{resource.title}} :
-            <a href="{{resource.url}}">{{resource.title}}</a>
-        </h1>
-
-        {% endfor %}
+        <ul>
+            {% for resource in resources %}
+            <li><a href="{{resource.url}}" target="_blank">{{resource.title}}</a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 
     <div class="row">
