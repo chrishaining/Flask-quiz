@@ -1,9 +1,9 @@
 from app import db
-from app.models import Topic, AnswerChoices, MultipleChoiceTopic
+from app.models import Topic, Resource
 
 
 Topic.query.delete()
-MultipleChoiceTopic.query.delete()
+Resource.query.delete()
 
 topic1 = Topic(question="What are virtual currencies and how do they work?", answer="Virtual currencies are electronic fiat currencies. They are very similar to traditional fiat currencies, but there is no physical currency (e.g. coin, paper, cheque). I'm not sure how they work.")
 topic2 = Topic(question="What is the aim of an effective customer due diligence (CDD) programme and why is it important in combating money laundering and terrorist financing risks in the FinTech market?", answer="Effective CDD means that financial institutions know who their customers are and only banks with customers who have passed the CDD requirements. This in turn means that the financial institutions only bank with customers they trust: they do not bank with customers who cannot be trusted to operate legitimately. This therefore reduces the risk of the financial institution's services being used for financial crime and money laundering.")
@@ -35,16 +35,11 @@ topic12 = Topic(question="How might blockchain be used in RegTech?", answer="Usi
 topic13 = Topic(question="How might blockchain be used in CDD?", answer="Blockchain allows this information to be shared through a unified platform with multiple service providers and also allows individual entities within the Blockchain to decide how much and what information they want shared between the multiple service providers they deal with. Unit 4, p. 65")
 
 
-topic14 = Topic(question="", answer="")
+# topic14 = Topic(question="", answer="")
 
 
-topic15 = Topic(question="", answer="")
+# topic15 = Topic(question="", answer="")
 
-
-
-mult_choice1 = MultipleChoiceTopic(question="What is the time?", answer='Now', option_a="Then", option_b="Soon", option_c="Now", user_answer="Now")
-mult_choice2 = MultipleChoiceTopic(question="What is the date?", answer='Today', option_a="Yesterday", option_b="Today", option_c="Tomorrow")
-mult_choice3 = MultipleChoiceTopic(question="What is the year?", answer='This year', option_a="Last year", option_b="This year", option_c="Next year")
 
 
 db.session.add(topic1)
@@ -60,17 +55,5 @@ db.session.add(topic10)
 
 db.session.commit()
 
-
-db.session.add(mult_choice1)
-db.session.add(mult_choice2)
-db.session.add(mult_choice3)
-db.session.commit()
-
 timey = Topic.query.all()
 print(timey)
-
-mults = MultipleChoiceTopic.query.all()
-print(mults[0].option_d)
-my_answer = mult_choice1.check_answer()
-print(my_answer)
-print(mult_choice1.outcome)
