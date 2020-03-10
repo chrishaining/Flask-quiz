@@ -14,4 +14,3 @@ The user can:
 * Edit links to further resources
 * Delete links to further resources 
 
-style="width:500px;height:300px;"
