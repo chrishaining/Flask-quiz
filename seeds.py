@@ -33,14 +33,56 @@ topic11 = Topic(question="What is network monitoring?", answer="Contextual or ne
 
 topic12 = Topic(question="How might blockchain be used in RegTech?", answer="Using the building blocks of blockchain would introduce a shared ledger to ensure that transactional activity within the chain can be monitored and adjusted in a more efficient way. Due to the shared nature of the ledger, a comprehensive database of client activity and background information would be available to all on the network. Unit 4, p. 64")
 
-
 topic13 = Topic(question="How might blockchain be used in CDD?", answer="Blockchain allows this information to be shared through a unified platform with multiple service providers and also allows individual entities within the Blockchain to decide how much and what information they want shared between the multiple service providers they deal with. Unit 4, p. 65")
 
 
-# topic14 = Topic(question="", answer="")
+topic14 = Topic(question="Almost half the world's unbanked live in which countries?", answer="China, India, Pakistan, Indonesia, Nigeria, Mexico and Bangladesh")
 
 
-# topic15 = Topic(question="", answer="")
+topic15 = Topic(question="How can technology change the exploitation of society by organised criminality?", answer="Financial crimes have data typologies that can be spotted if enough information can be analysed and machine learning tools can find such patterns.")
+
+
+topic16 = Topic(question="New technologies present a new set of risks that firms must understand and mitigate, including which of the following?", answer="i) Digital evolution is fast but cultural change is slow.\n ii) Data breaches degrade and destabilise the basic expectation that an individual's private information is not commoditised. \niii) Increasing reliance on interconnected systems increases the impact when these fail.\niv) Automation and new technology require forward-thinking governance mechanisms and operational controls.")
+
+
+topic17 = Topic(question="A virtual asset provider, according to the FATF, is a natural or legal person not covered elsewhere under the Recommendations and provides which of the following on behalf of another legal or natural person?", answer="i) Exchange between virtual assets and fiat currency \n ii) Transfer of virtual assets \n iii) Custodian services for virtual assets")
+
+
+topic18 = Topic(question="The concept of electronic money (e-money) was defined under which piece of European legislation?", answer="The Electronic Money Directive")
+
+
+topic19 = Topic(question="How will FinTech force incumbent financial services firms adapt to meet the challenge of 'tech savvy' rivals and new entrants?", answer="i) Cultural change will be needed. \n ii) They will need to adapt hiring practices to attract 'tech talent'. \n iii) Branding will need to focus on the customer experience.")
+
+
+topic20 = Topic(question="FinTech presents contradictions to be carefully considered because:", answer="it can be used to detect and prevent certain financial crimes but can be abused to perpetuate others")
+
+
+topic21 = Topic(question="The initial phase of FinTech carries increased operational risk owing to:", answer="a lack of technical skills, shortage of expert staff and inadequate technology infrastructure")
+
+
+topic22 = Topic(question="When can a system become vulnerable to financial crime?", answer="When controls are not tailored to the product and purpose")
+
+topic22 = Topic(question="Neither regulators nor banks have been able to build a consistent and universally applicable approach to risk profiling and applying control mechanisms to new market entrants – with banks quite often treating them in the same way they would treat money service businesses.  What is the principal reason for this?", answer="The speed of market entry by FinTechs")
+
+
+# topic22 = Topic(question="", answer="")
+
+
+# topic22 = Topic(question="", answer="")
+
+
+# topic22 = Topic(question="", answer="")
+
+
+# topic22 = Topic(question="", answer="")
+
+
+# topic22 = Topic(question="", answer="")
+
+
+# topic22 = Topic(question="", answer="")
+
+
 
 
 
