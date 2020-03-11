@@ -36,13 +36,13 @@ topic12 = Topic(question="How might blockchain be used in RegTech?", answer="Usi
 topic13 = Topic(question="How might blockchain be used in CDD?", answer="Blockchain allows this information to be shared through a unified platform with multiple service providers and also allows individual entities within the Blockchain to decide how much and what information they want shared between the multiple service providers they deal with. Unit 4, p. 65")
 
 
-topic14 = Topic(question="Almost half the world's unbanked live in which countries?", answer="China, India, Pakistan, Indonesia, Nigeria, Mexico and Bangladesh")
+topic14 = Topic(question="Almost half the world's unbanked live in which countries? (name seven countries)", answer="China, India, Pakistan, Indonesia, Nigeria, Mexico and Bangladesh")
 
 
 topic15 = Topic(question="How can technology change the exploitation of society by organised criminality?", answer="Financial crimes have data typologies that can be spotted if enough information can be analysed and machine learning tools can find such patterns.")
 
 
-topic16 = Topic(question="New technologies present a new set of risks that firms must understand and mitigate, including which of the following?", answer="i) Digital evolution is fast but cultural change is slow.\n ii) Data breaches degrade and destabilise the basic expectation that an individual's private information is not commoditised. \niii) Increasing reliance on interconnected systems increases the impact when these fail.\niv) Automation and new technology require forward-thinking governance mechanisms and operational controls.")
+topic16 = Topic(question="New technologies present a new set of risks that firms must understand and mitigate, including which of the following?", answer="i) Digital evolution is fast but cultural change is slow. \nii) Data breaches degrade and destabilise the basic expectation that an individual's private information is not commoditised. \niii) Increasing reliance on interconnected systems increases the impact when these fail. \niv) Automation and new technology require forward-thinking governance mechanisms and operational controls.")
 
 
 topic17 = Topic(question="A virtual asset provider, according to the FATF, is a natural or legal person not covered elsewhere under the Recommendations and provides which of the following on behalf of another legal or natural person?", answer="i) Exchange between virtual assets and fiat currency \n ii) Transfer of virtual assets \n iii) Custodian services for virtual assets")
@@ -96,6 +96,20 @@ db.session.add(topic7)
 db.session.add(topic8)
 db.session.add(topic9)
 db.session.add(topic10)
+db.session.add(topic11)
+db.session.add(topic12)
+db.session.add(topic13)
+db.session.add(topic14)
+db.session.add(topic15)
+db.session.add(topic16)
+db.session.add(topic17)
+db.session.add(topic18)
+db.session.add(topic19)
+db.session.add(topic20)
+db.session.add(topic21)
+db.session.add(topic22)
+
+
 
 db.session.commit()
 
